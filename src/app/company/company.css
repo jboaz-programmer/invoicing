@@ -1,0 +1,23 @@
+.logo-preview {
+  min-height: 150px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.round-logo {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.logo-initials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #3b82f6; /* fallback color */
+  color: #fff;
+  font-size: 48px;
+  font-weight: bold;
+}

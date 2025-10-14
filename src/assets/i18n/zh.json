@@ -1,0 +1,140 @@
+{
+  "SalesInvDash": {
+    "inv_issued": "已开具发票",
+    "total_inv": "发票总额",
+    "inv_paid": "已付款",
+    "inv_unpaid": "未付款"
+  },
+  "SalesInvDet": {
+    "title": "已开具发票列表",
+    "create_btn": "创建发票"
+  },
+  "inv_table": {
+    "no": "序号",
+    "cust_name": "客户名称",
+    "desc": "描述",
+    "inv_no": "发票号",
+    "inv_total": "总金额",
+    "inv_bal": "余额",
+    "inv_due": "到期日",
+    "inv_status": "状态",
+    "inv_act": "操作",
+    "inv_edit": "编辑",
+    "inv_del": "删除",
+    "inv_view": "查看发票",
+     "paid_stat": "已付款",
+    "partial_stat": "部分付款",
+    "not_paid": "未付款",
+    "canc": "已取消",
+    "inv_paid": "已付金额"
+  },
+
+  "create_inv": {
+    "cust_name": "客户名称",
+    "paid_fr": "付款来源",
+    "curr": "货币",
+    "exc_rate": "汇率",
+    "due": "到期日",
+    "desc": "描述",
+    "item": "项目名称",
+    "qty": "数量",
+    "unit": "单价",
+    "vat": "增值税类型",
+    "total": "总额",
+    "action": "操作",
+    "incl": "含税",
+    "exc": "不含税",
+    "add": "添加项目",
+    "excl_total": "不含税总额",
+    "vat_total": "增值税总额",
+    "grand_total": "总计",
+    "btn_save": "保存发票"
+  },
+  
+  "create_customer": {
+    "title": "创建客户",
+    "customer_name": "客户姓名",
+    "mobile_number": "手机号码",
+    "address": "地址",
+    "vrn": "VRN",
+    "tin": "税号",
+    "bank_account": "银行账户",
+    "add_button": "添加客户",
+    "placeholders": {
+      "name": "姓名",
+      "mobile": "手机",
+      "address": "地址",
+      "vrn": "VRN",
+      "tin": "税号",
+      "bank": "银行"
+    }
+  },
+  
+  "COMPANY_PROFILE": {
+    "header_company_contact": "公司及联系人信息",
+    "header_banking_tax": "银行及税务信息",
+    "header_logo": "公司标志",
+    "company_name": "公司名称",
+    "address": "地址",
+    "email": "电子邮件",
+    "mobile": "手机号",
+    "contact_person": "联系人",
+    "bank_name": "银行名称",
+    "bank_account_1": "银行账户1",
+    "bank_account_2": "银行账户2",
+    "account_name": "账户名称",
+    "swift_code": "Swift代码",
+    "tin": "纳税人识别号 (TIN)",
+    "vat": "增值税",
+    "update_button": "更新公司资料"
+  },
+  
+  "invoice_page": {
+    "process_payment": "处理付款",
+    "cancel": "取消",
+    "print": "打印",
+    "invoice_from": "发票来自：",
+    "billed_to": "开票给：",
+    "invoice_date": "发票日期：",
+    "invoice_summary": "发票摘要",
+    "item": "项目",
+    "unit_price_usd": "单价(美元)",
+    "unit_price_tzs": "单价(坦桑尼亚先令)",
+    "vat": "增值税(18%)",
+    "qty": "数量",
+    "totals": "总计",
+    "payment_methods": "支付方式",
+    "payment_info": "我们为您的方便提供多种付款方式：",
+    "subtotal": "小计",
+    "total_amount": "总金额",
+    "thank_you": "谢谢，我们很荣幸与您合作。欢迎再次光临！"
+},
+
+  
+  "sidebar": {
+    "main": "主菜单",
+    "dashboard": "仪表板",
+    "accounts": "账户",
+    "cashbank": "现金与银行账户",
+    "account_transfer": "账户间转账",
+    "transactions": "交易",
+    "record_expenses": "记录支出",
+    "record_incomes": "记录收入",
+    "debt_liabilities": "债务与应付",
+    "journal_entries": "分录",
+    "customer_reimbursements": "客户报销",
+    "attachments": "附件",
+    "payable_receivable": "应付与应收",
+    "invoices": "发票",
+    "sales_invoice": "销售发票",
+    "purchase_invoice": "采购发票",
+    "setup": "设置",
+    "settings": "系统设置",
+    "company_profile": "公司简介",
+    "customers": "客户",
+    "suppliers": "供应商"
+  }
+
+
+
+}

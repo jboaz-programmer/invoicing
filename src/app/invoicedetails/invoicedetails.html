@@ -1,0 +1,66 @@
+<section class="section">
+      <div class="row">
+        <div class="col-12">
+            <!-- <div class="card"> -->
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4>{{'SalesInvDet.title' |translate}}</h4>
+                    <!-- <button class="btn btn-primary" (click)="createInvoice()">
+                        <i class="fas fa-plus"></i> {{'SalesInvDet.create_btn' |translate}}
+                    </button> -->
+                </div>
+
+                <!-- <div class="card-body p-0"> -->
+                    <div class="table-responsive">
+                        <table class="table table-striped table-bordered dt-responsive nowrap" style="border-collapse: collapse; border-spacing:0; width:100%;">
+                            <tr>
+                                <th>{{'inv_table.no' |translate}}</th>
+                                <th>{{'inv_table.cust_name' |translate}}</th>
+                                <th>{{'inv_table.desc' |translate}}</th>
+                                <th>{{'inv_table.inv_no' |translate}}</th>
+                                <th>{{'inv_table.inv_total' |translate}}</th>
+                                <th>{{'inv_table.inv_paid' |translate}}</th>
+                                <th>{{'inv_table.inv_bal' |translate}}</th>
+                                <th>{{'inv_table.inv_due' |translate}}</th>
+                                <th>{{'inv_table.inv_status' |translate}}</th>
+                                <!-- <th>{{'inv_table.inv_act' |translate}}</th> -->
+                            </tr>
+                            <tbody *ngIf="invoices$ | async as data">
+                                <tr *ngFor="let inv of data; let i = index">
+                                    <td>{{i + 1}}</td>
+                                    <td>{{inv?.payee}}</td>
+                                    <td class="text-truncate">
+                                        {{inv?.descriptions}}
+                                    </td>
+                                    <td>{{inv?.receipt_no}}</td>
+                                    <td>{{inv?.total_amount_sum |number:'1.2-2'}}</td>
+                                    <td>{{inv?.paid_sum |number:'1.2-2'}}</td>
+                                    <td>{{inv?.balance_sum |number:'1.2-2'}}</td>
+                                    <td>{{inv?.due_date}}</td>
+
+                                    <td>
+                                        <ng-container *ngIf="inv?.balance_sum === 0">
+                                            <div class="badge badge-success">{{'inv_table.paid_stat' |translate}}</div>
+                                        </ng-container>
+
+                                        <ng-container
+                                            *ngIf="inv?.balance_sum !== 0 && inv?.balance_sum !== inv?.total_amount_sum">
+                                            <div class="badge badge-warning">{{'inv_table.partial_stat' |translate}}</div>
+                                        </ng-container>
+
+                                        <ng-container *ngIf="inv?.balance_sum == inv?.total_amount_sum">
+                                            <div class="badge badge-danger">{{'inv_table.not_paid' |translate}}</div>
+                                        </ng-container>
+                                    </td>
+                                
+                                </tr>
+                            </tbody>
+
+
+
+                        </table>
+                    </div>
+                <!-- </div> -->
+            <!-- </div> -->
+        </div>
+    </div>
+</section>

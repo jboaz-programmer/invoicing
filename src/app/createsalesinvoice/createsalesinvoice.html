@@ -1,0 +1,203 @@
+ <section class="section">
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-body">
+
+            <form (ngSubmit)="submitInvoice()">
+              <!-- Invoice Header -->
+              <div class="invoice-header row">
+                <div class="col-md-6">
+                  <label>{{ 'create_inv.cust_name' | translate }}</label>
+                  <div class="d-flex">
+                    <select class="form-control" [(ngModel)]="invoice.customer" name="customer"
+                      *ngIf="customers$ | async as data">
+                      <option *ngFor="let c of data; let i = index" [value]="c.name">{{ c.name }}</option>
+                    </select>
+                    <button type="button" class="btn btn-success ml-2" data-toggle="modal"
+                      data-target="#exampleModal1">+</button>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <label>{{ 'create_inv.paid_fr' | translate }}</label>
+                  <select class="form-control" [(ngModel)]="invoice.paidFrom" name="paidFrom"
+                    *ngIf="accounts$ | async as data">
+                    <option *ngFor="let acc of data; let i = index" [value]="acc.name">{{ acc.name }}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="invoice-header row mt-2">
+                <div class="col-md-4">
+                  <label>{{ 'create_inv.curr' | translate }}</label>
+                  <input type="text" class="form-control" [(ngModel)]="invoice.currency" name="currency">
+                </div>
+                <div class="col-md-4">
+                  <label>{{ 'create_inv.exc_rate' | translate }}</label>
+                  <input type="number" class="form-control" [(ngModel)]="invoice.exchRate" name="exchRate">
+                </div>
+                <div class="col-md-4">
+                  <label>{{ 'create_inv.due' | translate }}</label>
+                  <input type="date" class="form-control" [(ngModel)]="invoice.dueDate" name="dueDate">
+                </div>
+              </div>
+
+              <div class="invoice-header row mt-2">
+                <div class="col-md-12">
+                  <label>{{ 'create_inv.desc' | translate }}</label>
+                  <textarea class="form-control" [(ngModel)]="invoice.description" name="description"></textarea>
+                </div>
+              </div>
+
+              <hr>
+
+              <!-- Dynamic Items Table -->
+              <div class="items-table mt-3">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>{{ 'create_inv.item' | translate }}</th>
+                      <th>{{ 'create_inv.qty' | translate }}</th>
+                      <th>{{ 'create_inv.unit' | translate }}</th>
+                      <th>{{ 'create_inv.vat' | translate }}</th>
+                      <th>{{ 'create_inv.total' | translate }}</th>
+                      <th>{{ 'create_inv.action' | translate }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of items; let i = index">
+                      <td>{{ i + 1 }}</td>
+                      <td><input type="text" class="form-control" [(ngModel)]="item.name" name="itemName{{i}}"></td>
+                      <td><input type="number" class="form-control" [(ngModel)]="item.qty"
+                          (change)="calculateTotal(i)" name="itemQty{{i}}"></td>
+                      <td><input type="number" class="form-control" [(ngModel)]="item.unit"
+                          (change)="calculateTotal(i)" name="itemUnit{{i}}"></td>
+                      <td>
+                        <select class="form-control" [(ngModel)]="item.vatType" (change)="calculateTotal(i)"
+                          name="itemVat{{i}}">
+                          <option value="inclusive">{{ 'create_inv.incl' | translate }}</option>
+                          <option value="exclusive">{{ 'create_inv.exc' | translate }}</option>
+                        </select>
+                      </td>
+                      <td>{{ item.total | number:'1.2-2' }}</td>
+                      <td>
+                        <button type="button" class="btn btn-danger btn-sm" (click)="removeItem(i)">X</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button type="button" class="btn btn-primary" (click)="addItem()">{{ 'create_inv.add' | translate }}</button>
+              </div>
+
+              <hr>
+
+              <!-- Invoice Totals Table -->
+              <div class="invoice-total text-right mt-3">
+                <table class="table table-borderless w-auto ml-auto">
+                  <tr>
+                    <td class="text-right"><strong>{{ 'create_inv.excl_total' | translate }}:</strong></td>
+                    <td class="text-right">{{ invoice.exclusiveTotal | number:'1.2-2' }}</td>
+                  </tr>
+                  <tr>
+                    <td class="text-right"><strong>{{ 'create_inv.vat_total' | translate }}:</strong></td>
+                    <td class="text-right">{{ invoice.vatTotal | number:'1.2-2' }}</td>
+                  </tr>
+                  <tr class="table-dark">
+                    <td class="text-right"><strong>{{ 'create_inv.grand_total' | translate }}</strong></td>
+                    <td class="text-right"><strong>{{ invoice.inclusiveTotal | number:'1.2-2' }}</strong></td>
+                  </tr>
+                </table>
+              </div>
+
+              <button type="submit" class="btn btn-success mt-3">{{ 'create_inv.btn_save' | translate }}</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="formModal">{{ 'create_customer.title' | translate }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="">
+                    <div class="form-group">
+                        <label>{{ 'create_customer.customer_name' | translate }}</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control"
+                                placeholder="{{ 'create_customer.placeholders.name' | translate }}"
+                                [(ngModel)]="postData.name" name="name">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ 'create_customer.mobile_number' | translate }}</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control"
+                                placeholder="{{ 'create_customer.placeholders.mobile' | translate }}"
+                                [(ngModel)]="postData.mobile" name="mobile">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ 'create_customer.address' | translate }}</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control"
+                                placeholder="{{ 'create_customer.placeholders.address' | translate }}"
+                                [(ngModel)]="postData.address" name="address">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{ 'create_customer.vrn' | translate }}</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control"
+                                        placeholder="{{ 'create_customer.placeholders.vrn' | translate }}"
+                                        [(ngModel)]="postData.vrn" name="vrn">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>{{ 'create_customer.tin' | translate }}</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control"
+                                        placeholder="{{ 'create_customer.placeholders.tin' | translate }}"
+                                        [(ngModel)]="postData.tin" name="tin">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>{{ 'create_customer.bank_account' | translate }}</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control"
+                                placeholder="{{ 'create_customer.placeholders.bank' | translate }}"
+                                [(ngModel)]="postData.bank" name="bank">
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-primary m-t-15 waves-effect"
+                        (click)="createCustomer()" data-dismiss="modal">
+                        {{ 'create_customer.add_button' | translate }}
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,139 @@
+{
+   "SalesInvDash": {
+    "inv_issued": "Invoices Issued",
+    "total_inv" :"Total Invoice Amount",
+    "inv_paid":"Paid",
+    "inv_unpaid" :"Unpaid"
+  },
+  "SalesInvDet" :{
+    "title": "List of Invoice Issued",
+    "create_btn":"Create Invoice"
+  },
+  "inv_table": {
+    "no" : "S/N",
+    "cust_name": "Customer Name",
+    "desc":"Descriptions",
+    "inv_no":"Invoice #",
+    "inv_total" :"Total Amount",
+    "inv_bal":"Balance",
+    "inv_due":"Due Date",
+    "inv_status":"Status",
+    "inv_act" :"Action",
+    "inv_edit":"Edit",
+    "inv_del":"Delete",
+    "inv_view":"View Invoice",
+   
+    "paid_stat":"Paid",
+    "partial_stat":"Partial Paid",
+    "not_paid":"Not Paid",
+    "canc" :"Canceled",
+    "inv_paid" :"Paid Amount"
+  },
+
+  "create_inv":{
+    "cust_name": "Customer Name",
+    "paid_fr":"Paid from",
+    "curr":"Currency",
+    "exc_rate": "Exchange Rate",
+    "due" :"Due Date",
+    "desc": "Descriptions",
+    "item":"Item Name",
+    "qty": "Quantity",
+    "unit":"Unit Amount",
+    "vat": "Vat Type",
+    "total":"Total",
+    "action": "Action",
+    "incl": "Inclusive",
+    "exc":"Exclusive",
+    "add":"Add Item",
+    "excl_total":"Exclusive Total",
+    "vat_total":"VAT Total",
+    "grand_total":"Grand Total",
+    "btn_save":"Save Invoice"
+  },
+  
+  "create_customer": {
+    "title": "Create Customer",
+    "customer_name": "Customer Name",
+    "mobile_number": "Mobile Number",
+    "address": "Address",
+    "vrn": "VRN",
+    "tin": "Tin #",
+    "bank_account": "Bank Account",
+    "add_button": "Add Customer",
+    "placeholders": {
+      "name": "name",
+      "mobile": "mobile",
+      "address": "address",
+      "vrn": "VRN",
+      "tin": "Tin #",
+      "bank": "bank"
+    }
+
+}
+,
+  "COMPANY_PROFILE": {
+    "header_company_contact": "Company & Contact Information",
+    "header_banking_tax": "Banking & Tax Information",
+    "header_logo": "Company Logo",
+    "company_name": "Company Name",
+    "address": "Address",
+    "email": "Email",
+    "mobile": "Mobile #",
+    "contact_person": "Contact Person",
+    "bank_name": "Bank Name",
+    "bank_account_1": "Bank Account 1",
+    "bank_account_2": "Bank Account 2",
+    "account_name": "Account Name",
+    "swift_code": "Swift Code",
+    "tin": "TIN",
+    "vat": "VAT",
+    "update_button": "Update Company Profile"
+},
+  "invoice_page": {
+    "process_payment": "Process Payment",
+    "cancel": "Cancel",
+    "print": "Print",
+    "invoice_from": "Invoice From:",
+    "billed_to": "Billed To:",
+    "invoice_date": "Invoice Date:",
+    "invoice_summary": "Invoice Summary",
+    "item": "Item",
+    "unit_price_usd": "Unit Price(USD)",
+    "unit_price_tzs": "Unit Price(TZS)",
+    "vat": "Vat(18%)",
+    "qty": "Qty",
+    "totals": "Totals",
+    "payment_methods": "Payment Methods",
+    "payment_info": "We provide multiple payment methods for your convenience:",
+    "subtotal": "Subtotal",
+    "total_amount": "Total Amount",
+    "thank_you": "Thank you, we are honored to work with you. Welcome back!"
+  },
+  
+  "sidebar": {
+    "main": "Main",
+    "dashboard": "Dashboard",
+    "accounts": "Accounts",
+    "cashbank": "Cash & Bank Accounts",
+    "account_transfer": "Inter Account Transfer",
+    "transactions": "Transactions",
+    "record_expenses": "Record Expenses",
+    "record_incomes": "Record Incomes",
+    "debt_liabilities": "Debt & Payable (Liabilities)",
+    "journal_entries": "Journal Entries",
+    "customer_reimbursements": "Customer Reimbursements",
+    "attachments": "Attachments",
+    "payable_receivable": "Payable & Receivable",
+    "invoices": "Invoices",
+    "sales_invoice": "Sales Invoice",
+    "purchase_invoice": "Purchase Invoices",
+    "setup": "Setup",
+    "settings": "Settings",
+    "company_profile": "Company Profile",
+    "customers": "Customers",
+    "suppliers": "Suppliers"
+  
+}
+
+}

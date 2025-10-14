@@ -1,0 +1,111 @@
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">List Of Expenses</h4>
+                        <button class="btn btn-primary btn-sm"  (click)="createExpenses()">
+                            <i class="fas fa-plus"></i> Record Expenses
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover" id="tableExport" style="width:100%;">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Date</th>
+                                        <th>Descriptions</th>
+                                        <th>Account</th>
+                                        <th>Exclusive Amount</th>
+                                        <th>Vat Amount</th>
+                                        <th>Inclusive Amount</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody *ngIf="expenses$ | async as data">
+                                    <tr *ngFor="let exp of data; let i = index">
+                                        <td>{{ i + 1 }}</td>
+                                        <td>{{ exp?.created_at }}</td>
+                                        <td>{{ exp?.item }}</td>
+                                        <td>{{ exp?.profit_accountname }}</td>
+                                        <td>{{ exp?.exclusive | number: '1.2-2' }}</td>
+                                        <td>{{ exp?.vatamount | number: '1.2-2' }}</td>
+                                        <td>{{ exp?.inclusive | number: '1.2-2' }}</td>
+                                        <td>
+                                            <div class="dropdown d-inline">
+                                                <button class="btn btn-primary dropdown-toggle" type="button"
+                                                    id="dropdownMenuButton2" data-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false">
+                                                    Action
+                                                </button>
+                                                <div class="dropdown-menu">
+                                                    <a class="dropdown-item has-icon" href="javascript:void(0)"
+                                                        (click)="EditFunc(exp?.transaction_id)" >
+                                                        <i class="fas fa-pencil-alt text-success"></i> Edit
+                                                    </a>
+                                                    <a class="dropdown-item has-icon" href="javascript:void(0)"
+                                                        (click)="deleteAccount(exp?.transaction_id)">
+                                                        <i class="fas fa-trash-alt text-danger"></i> Delete
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </td>
+                                    </tr>
+
+                                </tbody>
+
+
+
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    id="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="myLargeModalLabel">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form class="">
+                    <div class="form-group">
+                        <label>Account Name</label>
+                        <div class="input-group">
+
+                            <input type="text" class="form-control"  name="name">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Currency</label>
+                        <div class="input-group">
+
+                            <input type="text" class="form-control" placeholder="Currency"
+                                  name="currency">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Staring Balance</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="amount"
+                                  name="amount">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-primary m-t-15 waves-effect" 
+                        data-dismiss="modal">Update</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

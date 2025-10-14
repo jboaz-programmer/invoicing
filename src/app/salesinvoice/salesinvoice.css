@@ -1,0 +1,38 @@
+table {
+    width: 100%;
+    /* border-collapse: collapse; */
+    /* page-break-inside: avoid; */
+
+}
+
+table th, table td {
+    border: 2px solid #ddd;
+    padding: 0px;
+    text-align: left;
+    vertical-align: top; /* Ensures proper alignment of wrapped text */
+    font-size: 12px;
+}
+
+table th {
+    background-color: #f2f2f2;
+}
+
+table td {
+    word-wrap: break-word; /* Ensures long words are broken and wrapped to the next line */
+    white-space: normal;   /* Allows text to wrap */
+    word-break: break-all; /* Ensures text breaks within words if necessary */
+}
+
+/* Optional: Adding some additional styles for better readability */
+table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tr:hover {
+    background-color: #f1f1f1;
+}
+.no-hover tr:hover {
+    background-color: transparent !important;
+    background-color: white !important;
+
+}

@@ -1,0 +1,171 @@
+/* ========== BASE ========== */
+.invoice {
+  background: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  font-family: 'Arial', sans-serif;
+  color: #333;
+  overflow: hidden;
+}
+
+/* ========== ACTION BUTTONS ========== */
+.invoice-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 10px 0;
+}
+
+.invoice-actions .btn {
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.invoice-container {
+  /* width: 842px;  */
+  width: 1000;
+  max-width: 100%;
+}
+
+
+@media print {
+  .invoice-actions {
+    display: none !important;
+  }
+}
+
+/* ========== HEADER ========== */
+.header-box {
+  position: relative;
+  background: linear-gradient(135deg, #e3e4e5, #e5eaf0);
+  padding: 10px 20px;
+  display: flex;
+  justify-content: flex-end; /* logo on right */
+  align-items: center; /* vertically center logo */
+  height: 120px;
+  border-radius: 8px 8px 0 0;
+}
+
+/* SVG Wave */
+.header-box::after {
+  content: "";
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  /* background: url("data:image/svg+xml;utf8,<svg viewBox='0 0 1440 320' xmlns='http://www.w3.org/2000/svg'><path fill='%23ffffff' fill-opacity='1' d='M0,160L80,170.7C160,181,320,203,480,197.3C640,192,800,160,960,138.7C1120,117,1280,107,1360,101.3L1440,96L1440,320L1360,320C1280,320,1120,320,960,320C800,320,640,320,480,320C320,320,160,320,80,320L0,320Z'></path></svg>") no-repeat bottom; */
+  background-size: cover;
+  z-index: 1;
+}
+
+/* LOGO STYLING */
+/* .company-logo img {
+  max-height: 140px;
+  width: auto;
+  display: block;
+} */
+.company-logo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fafafa;   /* fallback background */
+}
+
+.company-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.logo-initials {
+  font-size: 48px;
+  font-weight: bold;
+  color: #fff;
+  background: #3b82f6; /* blue, you can randomize */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* ========== ADDRESSES ========== */
+.invoice address {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* ========== TABLE ========== */
+.invoice table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+.invoice table th,
+.invoice table td {
+  border: 1px solid #e0e0e0;
+  padding: 12px 8px;
+  font-size: 14px;
+}
+.invoice table th {
+  font-weight: 600;
+  background: #f1f5f9;
+}
+.invoice table tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+.invoice table tbody tr:hover {
+  background: #f0f8ff;
+}
+
+/* ========== TOTALS ========== */
+.invoice-detail-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.invoice-detail-name {
+  font-size: 14px;
+  color: #666;
+}
+.invoice-detail-value {
+  font-size: 16px;
+  font-weight: bold;
+}
+.invoice-detail-value-lg {
+  font-size: 22px;
+  color: #003366;
+  font-weight: 700;
+}
+
+/* ========== FOOTER ========== */
+.invoice-footer {
+  background: #f9f9f9;
+  padding: 15px;
+  text-align: center;
+  font-size: 12px;
+  color: #666;
+  border-top: 1px solid #ddd;
+}
+
+/* ========== PRINT SETTINGS ========== */
+@media print {
+  body {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  .btn, .no-print {
+    display: none !important;
+  }
+  .invoice {
+    border: none;
+    box-shadow: none;
+  }
+}

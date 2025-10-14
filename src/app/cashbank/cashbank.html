@@ -1,0 +1,158 @@
+<section class="section">
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">Cash & Bank Accounts</h4>
+            <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModal">
+              <i class="fas fa-plus"></i> Create Account
+            </button>
+          </div>
+
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-striped" id="table-1">
+                <thead>
+                  <tr>
+                    <th>
+                      #
+                    </th>
+                    <th>Account Name</th>
+                    <th>Currency</th>
+                    <th>Balance </th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody *ngIf="accounts$ | async as data">
+
+                  <tr *ngFor="let accs of data; let i = index">
+                    <td>
+                      {{i + 1}}
+                    </td>
+                    <td>{{accs?.name}}</td>
+                    <td>{{accs?.currency}}
+                    </td>
+
+                    <td>
+                      {{accs?.amount | number:'1.2-2' }}
+                    </td>
+                    <td>
+                      <div class="badge badge-success badge-shadow">Active</div>
+                    </td>
+                    <td>
+                      <div class="dropdown d-inline">
+                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton2"
+                          data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Action
+                        </button>
+                        <div class="dropdown-menu">
+                          <a class="dropdown-item has-icon" href="javascript:void(0)" (click)="openEditModal(accs)" data-toggle="modal"
+                            data-target="#exampleModal1">
+                            <i class="fas fa-pencil-alt text-success"></i> Edit
+                          </a>
+                          <a class="dropdown-item has-icon" href="javascript:void(0)" (click)="deleteAccount(accs.id)"><i class="fas fa-trash-alt text-danger" ></i>
+                            Delete</a>
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+</section>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="formModal">Create Cash Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="">
+          <div class="form-group">
+            <label>Account Name</label>
+            <div class="input-group">
+
+              <input type="text" class="form-control" placeholder="Account Name" [(ngModel)]="postData.name"
+                name="name">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Currency</label>
+            <div class="input-group">
+
+              <input type="text" class="form-control" placeholder="Currency" [(ngModel)]="postData.currency"
+                name="currency">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Staring Balance</label>
+            <div class="input-group">
+
+              <input type="text" class="form-control" placeholder="amount" [(ngModel)]="postData.amount" name="amount">
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary m-t-15 waves-effect" (click)="Save()"
+            data-dismiss="modal">Save</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="formModal">Update Cash Account</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <input type="hidden" class="form-control"[(ngModel)]="selectedAccount.id"
+                name="id">
+         <form class="">
+          <div class="form-group">
+            <label>Account Name</label>
+            <div class="input-group">
+
+              <input type="text" class="form-control"[(ngModel)]="selectedAccount.name"
+                name="name">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label>Currency</label>
+            <div class="input-group">
+
+              <input type="text" class="form-control" placeholder="Currency" [(ngModel)]="selectedAccount.currency"
+                name="currency">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Staring Balance</label>
+            <div class="input-group">
+
+              <input type="text" class="form-control" placeholder="amount" [(ngModel)]="selectedAccount.amount" name="amount">
+            </div>
+          </div>
+          <button type="button" class="btn btn-primary m-t-15 waves-effect" (click)="update()"
+            data-dismiss="modal">Update</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,153 @@
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h4 class="mb-0">Record Income</h4>
+
+                        <div class="d-flex gap-2">
+                            <!-- Import Excel Form -->
+                            <form class="d-flex gap-1 mb-0">
+                                <input type="file" class="form-control form-control-sm" (change)="onFileSelected($event)" />
+                                <button class="btn btn-success btn-sm" type="submit" (click)="uploadExcel()">Import</button>
+                            </form>
+
+                            <!-- Download Template Button -->
+                            <button class="btn btn-secondary btn-sm" (click)="exportExcel()">Download
+                                Template</button>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+
+                        <form [formGroup]="incomeForm" (ngSubmit)="submitForm()">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <label>Description</label>
+                                    <input type="text" class="form-control" formControlName="descriptions">
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Paid / Receive From</label>
+                                    <select class="form-control" formControlName="paidfrom"
+                                        *ngIf="accounts$ | async as data">
+                                        <option *ngFor="let acc of data; let i = index" [value]="acc.id">{{ acc.name }}
+                                        </option>
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Exchange Rate</label>
+                                    <input type="text" class="form-control" formControlName="exch_rate">
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Date</label>
+                                    <input type="date" class="form-control" formControlName="created_at">
+                                </div>
+                            </div>
+
+                            <!-- Second row base fields -->
+                            <div class="row mt-3">
+                                <div class="col-md-3"><label>Customer</label><input type="text" class="form-control"
+                                        formControlName="supplier"></div>
+                                <div class="col-md-3"><label>VRN</label><input type="text" class="form-control"
+                                        formControlName="vrn"></div>
+                                <div class="col-md-3"><label>V Code</label><input type="text" class="form-control"
+                                        formControlName="v_code"></div>
+                                <div class="col-md-3"><label>Receipt No</label><input type="text" class="form-control"
+                                        formControlName="receipt_no"></div>
+                            </div>
+
+                            <!-- Dynamic items -->
+                            <div formArrayName="items" class="mt-3">
+                                <div *ngFor="let item of items.controls; let i = index" [formGroupName]="i"
+                                    class="row mb-2">
+                                    <div class="col-md-3">
+                                        <label>Choose Account</label>
+                                        <select class="form-control" formControlName="profit_account_id"
+                                            name="profit_account_id">
+                                            <option value="">Select Account</option>
+
+                                            <!-- Top level accounts -->
+                                            <ng-container *ngFor="let group of chataccounts$ | async">
+                                                <ng-container>
+                                                    <option *ngFor="let account of group.profitaccounts"
+                                                        [value]="account.id">
+                                                        {{ account?.accountname }} - {{ group?.groupname }}
+                                                    </option>
+                                                </ng-container>
+
+                                                <!-- Subgroups -->
+                                                <ng-container *ngIf="group.subgroups?.length > 0">
+                                                    <ng-container
+                                                        *ngTemplateOutlet="renderSubgroups; context:{ subgroups: group.subgroups, prefix: group.groupname }">
+                                                    </ng-container>
+                                                </ng-container>
+                                            </ng-container>
+                                        </select>
+                                        <!-- Recursive template -->
+                                        <ng-template #renderSubgroups let-subgroups="subgroups" let-prefix="prefix">
+                                            <ng-container *ngFor="let subgroup of subgroups">
+                                                <option *ngFor="let account of subgroup.profitaccounts"
+                                                    [value]="account.id">
+                                                    {{ account?.accountname }} - {{ prefix }} / {{ subgroup?.groupname }}
+                                                </option>
+
+                                                <ng-container *ngIf="subgroup.subgroups?.length > 0">
+                                                    <ng-container
+                                                        *ngTemplateOutlet="renderSubgroups; context:{ subgroups: subgroup.subgroups, prefix: prefix + ' / ' + subgroup.groupname }">
+                                                    </ng-container>
+                                                </ng-container>
+                                            </ng-container>
+                                        </ng-template>
+                                    </div>
+                                    <div class="col-md-2"><label>Item Desc</label><input type="text"
+                                            class="form-control" formControlName="item"></div>
+                                    <div class="col-md-1"><label>Qty</label><input type="number" class="form-control"
+                                            formControlName="Qty"></div>
+                                    <div class="col-md-2">
+                                        <label>Choose VAT</label>
+                                        <select class="form-control" formControlName="vat">
+                                            <option value="Vat">VAT</option>
+                                            <option value="noVat">NO VAT</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-2"><label>Amount</label><input type="number" class="form-control"
+                                            formControlName="unit_amount"></div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-danger mt-4"
+                                            (click)="removeItem(i)">Remove</button>
+                                    </div>
+                                </div>
+                                <button type="button" class="btn btn-primary" (click)="addItem()"> + Add Line</button>
+                            </div>
+                            <!-- <input type="file" class="form-control form-control-sm" /> -->
+                            <!-- Image Upload -->
+
+                            <!-- <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <h4>Multiple Upload</h4>
+                                        </div>
+                                        <div class="card-body">
+                                            <form action="#" class="dropzone" id="mydropzone">
+                                                <div class="fallback">
+                                                    <input name="file" type="file" multiple />
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> -->
+                            <!-- Submit -->
+                            <div class="mt-5">
+                                <button type="submit" class="btn btn-success">Save Income</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>

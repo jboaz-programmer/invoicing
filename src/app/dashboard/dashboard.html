@@ -1,0 +1,201 @@
+<!-- Main Content -->
+<section class="section">
+    <div class="row ">
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="card">
+                <div class="card-statistic-4">
+                    <div class="align-items-center justify-content-between">
+                        <div class="row ">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                                <div class="card-content">
+                                    <h5 class="font-15">Total Incomes</h5>
+                                    <h2 class="mb-3 font-18" *ngIf="response$ | async as data">{{data?.total_income
+                                        |number}}</h2>
+                                    <p class="mb-0"><span class="col-green">10%</span> Increase</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                                <div class="banner-img">
+                                    <img src="assets/img/banner/1.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="card">
+                <div class="card-statistic-4">
+                    <div class="align-items-center justify-content-between">
+                        <div class="row ">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                                <div class="card-content">
+                                    <h5 class="font-15"> Total Bank Amount</h5>
+                                    <h2 class="mb-3 font-18" *ngIf="response$ | async as data">{{data?.bank_total
+                                        |number}}</h2>
+                                    <p class="mb-0"><span class="col-orange">09%</span> Decrease</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                                <div class="banner-img">
+                                    <img src="assets/img/banner/2.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="card">
+                <div class="card-statistic-4">
+                    <div class="align-items-center justify-content-between">
+                        <div class="row ">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                                <div class="card-content">
+                                    <h5 class="font-15">Total Expenses</h5>
+                                    <h2 class="mb-3 font-18" *ngIf="response$ | async as data">{{data?.total_expenses
+                                        |number}}</h2>
+                                    <p class="mb-0"><span class="col-green">18%</span>
+                                        Increase</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                                <div class="banner-img">
+                                    <img src="assets/img/banner/3.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-3 col-lg-6 col-md-6 col-sm-6 col-xs-12">
+            <div class="card">
+                <div class="card-statistic-4">
+                    <div class="align-items-center justify-content-between">
+                        <div class="row ">
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pr-0 pt-3">
+                                <div class="card-content">
+                                    <h5 class="font-15">Cash On Handle</h5>
+                                    <h2 class="mb-3 font-18" *ngIf="response$ | async as data">
+                                        {{data?.cash_on_hand_total |number}}</h2>
+                                    <p class="mb-0"><span class="col-green">42%</span> Increase</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6 pl-0">
+                                <div class="banner-img">
+                                    <img src="assets/img/banner/4.png" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- chatsacc -->
+    <div class="row" *ngIf="response$ | async as data">
+        <!-- Iterate main profit groups -->
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+            <div class="card" *ngFor="let profitgroups of data.chatsacc">
+                <div *ngIf="profitgroups.transtype === 'balancegroup'">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">{{ profitgroups.groupname }}</h4>
+                    <span class="badge-pill" style="font-weight:bold; color:black; font-size:1.1em">
+                        {{ profitgroups?.net_balance | number:'1.2-2' }}
+                    </span>
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body">
+                    <ul class="list-group">
+
+                        <!-- Accounts directly under main group -->
+                        <li class="list-group-item d-flex justify-content-between align-items-center"
+                            *ngFor="let account of profitgroups.profitaccounts">
+                            {{ account.accountname }}
+                            <span class="badge badge-primary badge-pill">
+                                {{ account.net_balance | number:'1.2-2' }}
+                            </span>
+                        </li>
+
+                        <!-- Subgroups -->
+                        <ng-container *ngFor="let subgroup of profitgroups.subgroups">
+                            <!-- Subgroup header -->
+                            <li
+                                class="list-group-item d-flex justify-content-between align-items-center font-weight-bold bg-light">
+                                {{ subgroup.groupname }}
+                                <span class="badge badge-secondary badge-pill">
+                                    {{ subgroup.net_balance | number:'1.2-2' }}
+                                </span>
+                            </li>
+
+                            <!-- Accounts under subgroup -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center pl-4"
+                                *ngFor="let account of subgroup.profitaccounts">
+                                {{ account.accountname }}
+                                <span class="badge badge-primary badge-pill">
+                                    {{ account.net_balance | number:'1.2-2' }}
+                                </span>
+                            </li>
+                        </ng-container>
+
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 mb-3">
+            <div class="card" *ngFor="let profitgroups of data.chatsacc">
+                <div *ngIf="profitgroups.transtype === 'profitgroup'">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h4 class="mb-0">{{ profitgroups.groupname }}</h4>
+                    <span class="badge-pill" style="font-weight:bold; color:black; font-size:1.1em">
+                        {{ profitgroups?.net_balance | number:'1.2-2' }}
+                    </span>
+                </div>
+
+                <!-- Card Body -->
+                <div class="card-body">
+                    <ul class="list-group">
+
+                        <!-- Accounts directly under main group -->
+                        <li class="list-group-item d-flex justify-content-between align-items-center"
+                            *ngFor="let account of profitgroups.profitaccounts">
+                            {{ account.accountname }}
+                            <span class="badge badge-primary badge-pill">
+                                {{ account.net_balance | number:'1.2-2' }}
+                            </span>
+                        </li>
+
+                        <!-- Subgroups -->
+                        <ng-container *ngFor="let subgroup of profitgroups.subgroups">
+                            <!-- Subgroup header -->
+                            <li
+                                class="list-group-item d-flex justify-content-between align-items-center font-weight-bold bg-light">
+                                {{ subgroup.groupname }}
+                                <span class="badge badge-secondary badge-pill">
+                                    {{ subgroup.net_balance | number:'1.2-2' }}
+                                </span>
+                            </li>
+
+                            <!-- Accounts under subgroup -->
+                            <li class="list-group-item d-flex justify-content-between align-items-center pl-4"
+                                *ngFor="let account of subgroup.profitaccounts">
+                                {{ account.accountname }}
+                                <span class="badge badge-primary badge-pill">
+                                    {{ account.net_balance | number:'1.2-2' }}
+                                </span>
+                            </li>
+                        </ng-container>
+
+                    </ul>
+                </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

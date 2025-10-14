@@ -1,0 +1,123 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "accounting_ng": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular/build:application",
+          "options": {
+            "browser": "src/main.ts",
+            "tsConfig": "tsconfig.app.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "src/assets",
+                "output": "/assets"
+              }
+            ],
+             "styles": [
+                  "node_modules/izitoast/dist/css/iziToast.min.css",
+                  "src/assets/bundles/dropzonejs/dropzone.css",
+                  "src/assets/bundles/datatables/datatables.min.css",
+                  "src/assets/bundles/datatables/DataTables-1.10.16/css/dataTables.bootstrap4.min.css",
+                  "src/assets/bundles/bootstrap-social/bootstrap-social.css",
+                  "src/assets/css/app.min.css",
+                  "src/assets/css/components.css",
+                  "src/assets/css/style.css",
+                  "src/assets/css/components.css",
+                  "src/assets/css/custom.css",
+                  "src/styles.css"
+              ],
+         "scripts": [
+                  "node_modules/jquery/dist/jquery.min.js",
+                   "src/assets/js/app.min.js",
+                  "src/assets/js/page/index.js",
+                  "src/assets/js/scripts.js",
+                  "src/assets/js/custom.js",
+                  "src/assets/bundles/datatables/datatables.min.js",
+                  "src/assets/bundles/datatables/DataTables-1.10.16/js/dataTables.bootstrap4.min.js",
+                  "src/assets/bundles/datatables/export-tables/dataTables.buttons.min.js",
+                  "src/assets/bundles/datatables/export-tables/buttons.flash.min.js",
+                  "src/assets/bundles/datatables/export-tables/jszip.min.js",
+                  "src/assets/bundles/datatables/export-tables/pdfmake.min.js",
+                  "src/assets/bundles/datatables/export-tables/vfs_fonts.js",
+                  "src/assets/bundles/datatables/export-tables/buttons.print.min.js",
+                  "src/assets/bundles/jquery-ui/jquery-ui.min.js",
+                  "src/assets/js/page/datatables.js"
+              
+                ],
+              "server": "src/main.server.ts",
+            "outputMode": "server",
+            "ssr": {
+              "entry": "src/server.ts"
+            }
+          },
+          "configurations": {
+            "production": {
+              
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kB",
+                  "maximumError": "1MB"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "4kB",
+                  "maximumError": "8kB"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular/build:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "accounting_ng:build:production"
+            },
+            "development": {
+              "buildTarget": "accounting_ng:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular/build:extract-i18n"
+        },
+        "test": {
+          "builder": "@angular/build:karma",
+          "options": {
+            "tsConfig": "tsconfig.spec.json",
+            "assets": [
+              {
+                "glob": "**/*",
+                "input": "public"
+              }
+            ],
+            "styles": [
+              "src/styles.css"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": "d2620a3c-6906-42ab-965f-0bf561fef7a5"
+  }
+}

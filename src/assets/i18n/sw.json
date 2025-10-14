@@ -1,0 +1,139 @@
+{
+  "SalesInvDash": {
+    "inv_issued": "Ankara Zilizotolewa",
+    "total_inv": "Jumla ya Kiasi cha Ankara",
+    "inv_paid": "Zilizolipwa",
+    "inv_unpaid": "Hazijalipwa"
+  },
+  "SalesInvDet": {
+    "title": "Orodha ya Ankara Zilizotolewa",
+    "create_btn": "Tengeneza Ankara"
+  },
+  "inv_table": {
+    "no": "Namba",
+    "cust_name": "Jina la Mteja",
+    "desc": "Maelezo",
+    "inv_no": "Ankara #",
+    "inv_total": "Jumla ya Kiasi",
+    "inv_bal": "Salio",
+    "inv_due": "Tarehe ya Malipo",
+    "inv_status": "Hali",
+    "inv_act": "Kitendo",
+    "inv_edit": "Hariri",
+    "inv_del": "Futa",
+    "inv_view": "Angalia Ankara",
+     "paid_stat": "Imelipwa",
+    "partial_stat": "Sehemu Imeuzwa",
+    "not_paid": "Haijalipwa",
+    "canc": "Imefutwa",
+    "inv_paid": "Kiasi Kilicholipwa"
+  },
+  
+  "create_inv": {
+    "cust_name": "Jina la Mteja",
+    "paid_fr": "Imepewa Kutoka",
+    "curr": "Sarafu",
+    "exc_rate": "Kiwango cha Kubadilisha",
+    "due": "Tarehe ya Malipo",
+    "desc": "Maelezo",
+    "item": "Jina la Bidhaa",
+    "qty": "Kiasi",
+    "unit": "Kiasi kwa Kitengo",
+    "vat": "Aina ya VAT",
+    "total": "Jumla",
+    "action": "Kitendo",
+    "incl": "Pamoja na VAT",
+    "exc": "Bila VAT",
+    "add": "Ongeza Bidhaa",
+    "excl_total": "Jumla Bila VAT",
+    "vat_total": "Jumla ya VAT",
+    "grand_total": "Jumla Kuu",
+    "btn_save": "Hifadhi Ankara"
+},
+
+  "create_customer": {
+    "title": "Tengeneza Mteja",
+    "customer_name": "Jina la Mteja",
+    "mobile_number": "Namba ya Simu",
+    "address": "Anuani",
+    "vrn": "VRN",
+    "tin": "Namba ya TIN",
+    "bank_account": "Akaunti ya Benki",
+    "add_button": "Ongeza Mteja",
+    "placeholders": {
+      "name": "jina",
+      "mobile": "simu",
+      "address": "anuani",
+      "vrn": "VRN",
+      "tin": "TIN",
+      "bank": "benki"
+    }
+},
+
+  "COMPANY_PROFILE": {
+    "header_company_contact": "Taarifa za Kampuni na Mawasiliano",
+    "header_banking_tax": "Taarifa za Benki na Kodi",
+    "header_logo": "Logo ya Kampuni",
+    "company_name": "Jina la Kampuni",
+    "address": "Anwani",
+    "email": "Barua Pepe",
+    "mobile": "Namba ya Simu",
+    "contact_person": "Mtu wa Mawasiliano",
+    "bank_name": "Jina la Benki",
+    "bank_account_1": "Akaunti ya Benki 1",
+    "bank_account_2": "Akaunti ya Benki 2",
+    "account_name": "Jina la Akaunti",
+    "swift_code": "Msimbo wa SWIFT",
+    "tin": "Namba ya Kodi (TIN)",
+    "vat": "VAT",
+    "update_button": "Sasisha Profaili ya Kampuni"
+  },
+  
+  "invoice_page": {
+    "process_payment": "Fanya Malipo",
+    "cancel": "Ghairi",
+    "print": "Chapa",
+    "invoice_from": "Ankara Kutoka:",
+    "billed_to": "Imetoa Bili Kwa:",
+    "invoice_date": "Tarehe ya Ankara:",
+    "invoice_summary": "Muhtasari wa Ankara",
+    "item": "Kipengele",
+    "unit_price_usd": "Bei ya Kila Kipengele(USD)",
+    "unit_price_tzs": "Bei ya Kila Kipengele(TZS)",
+    "vat": "Kodi(18%)",
+    "qty": "Kiasi",
+    "totals": "Jumla",
+    "payment_methods": "Njia za Malipo",
+    "payment_info": "Tunatoa njia nyingi za malipo kwa urahisi wako:",
+    "subtotal": "Jumla Ndogo",
+    "total_amount": "Jumla ya Malipo",
+    "thank_you": "Asante, tunashukuru kushirikiana nawe. Karibu tena!"
+  },
+  
+  "sidebar": {
+    "main": "Kuu",
+    "dashboard": "Dashibodi",
+    "accounts": "Akaunti",
+    "cashbank": "Akaunti za Pesa na Benki",
+    "account_transfer": "Uhamisho Kati ya Akaunti",
+    "transactions": "Miamala",
+    "record_expenses": "Rekodi Matumizi",
+    "record_incomes": "Rekodi Mapato",
+    "debt_liabilities": "Deni & Lipa (Madhumuni ya Madeni)",
+    "journal_entries": "Jumla ya Kuingiza",
+    "customer_reimbursements": "Rekebisho za Wateja",
+    "attachments": "Viambatisho",
+    "payable_receivable": "Madeni & Mapato",
+    "invoices": "Ankara",
+    "sales_invoice": "Ankara za Mauzo",
+    "purchase_invoice": "Ankara za Ununuzi",
+    "setup": "Mpangilio",
+    "settings": "Mipangilio",
+    "company_profile": "Wasifu wa Kampuni",
+    "customers": "Wateja",
+    "suppliers": "Wauzaji"
+  
+}
+
+
+}

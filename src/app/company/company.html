@@ -1,0 +1,145 @@
+<section class="section">
+    <div class="section-body">
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+
+                        <form [formGroup]="companyForm" (ngSubmit)="onSubmit()" enctype="multipart/form-data">
+                            <div class="row">
+                                <!-- LEFT SIDE (Company, Contact, Banking, Tax) -->
+                                <div class="col-md-8">
+                                    <!-- Company + Contact -->
+                                    <div class="card mb-3">
+                                        <div class="card-header fw-bold">{{ 'COMPANY_PROFILE.header_company_contact' |
+                                            translate }}</div>
+                                        <div class="card-body row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">{{ 'COMPANY_PROFILE.company_name' | translate
+                                                    }}</label>
+                                                <input type="text" formControlName="company" class="form-control" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">{{ 'COMPANY_PROFILE.address' | translate
+                                                    }}</label>
+                                                <input type="text" formControlName="address" class="form-control" />
+
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">{{ 'COMPANY_PROFILE.email' | translate
+                                                    }}</label>
+                                                <input type="email" formControlName="email" class="form-control" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">{{ 'COMPANY_PROFILE.mobile' | translate
+                                                    }}</label>
+                                                <input type="text" formControlName="mobile_one" class="form-control" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+
+                                                <label class="form-label">{{ 'COMPANY_PROFILE.contact_person' |
+                                                    translate }}</label>
+                                                <input type="text" formControlName="person" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Banking + Tax -->
+                                    <div class="card mb-3">
+                                        <div class="card-header fw-bold">{{ 'COMPANY_PROFILE.header_banking_tax' |
+                                            translate }}</div>
+                                        <div class="card-body row">
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">{{ 'COMPANY_PROFILE.bank_name' | translate
+                                                    }}</label>
+                                                <input type="text" formControlName="bankname" class="form-control" />
+
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">{{ 'COMPANY_PROFILE.bank_account_1' |
+                                                    translate }}</label>
+                                                <input type="text" formControlName="bank_one" class="form-control" />
+
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">{{ 'COMPANY_PROFILE.bank_account_2' |
+                                                    translate }}</label>
+                                                <input type="text" formControlName="bank_two" class="form-control" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">{{ 'COMPANY_PROFILE.account_name' | translate
+                                                    }}</label>
+                                                <input type="text" formControlName="accountname" class="form-control" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+
+                                                <label class="form-label">{{ 'COMPANY_PROFILE.swift_code' | translate
+                                                    }}</label>
+                                                <input type="text" formControlName="swiftcode" class="form-control" />
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">{{ 'COMPANY_PROFILE.tin' | translate
+                                                    }}</label>
+                                                <input type="text" formControlName="tin" class="form-control" />
+
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label class="form-label">{{ 'COMPANY_PROFILE.vat' | translate
+                                                    }}</label>
+                                                <input type="text" formControlName="vat" class="form-control" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- RIGHT SIDE (Logo) -->
+                                <div class="col-md-4">
+                                    <div class="card mb-3">
+                                        <div class="card-header fw-bold">{{ 'COMPANY_PROFILE.header_logo' | translate }}
+                                        </div>
+                                        <div class="card-body text-center">
+
+                                            <div class="logo-preview border p-3 mb-3">
+                                                <!-- Show logo if uploaded -->
+                                                <ng-container *ngIf="logoPreview; else initials">
+                                                    <img [src]="logoPreview" alt="Logo" class="round-logo" />
+                                                </ng-container>
+
+                                                <!-- Fallback: show initials -->
+                                                <ng-template #initials>
+                                                    <div class="logo-initials round-logo">
+                                                        {{ getInitials(companyDet?.company) }}
+                                                    </div>
+                                                </ng-template>
+                                            </div>
+
+                                            <!-- File Input -->
+                                            <input type="file" accept="image/*" (change)="onLogoSelected($event)"
+                                                class="form-control" />
+
+                                            <!-- Remove Button -->
+                                            <button *ngIf="logoPreview || companyDet?.logo_url" type="button"
+                                                class="btn btn-danger mt-2 w-100" (click)="removeLogo()">
+                                                Remove Logo
+                                            </button>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <!-- Submit -->
+                            <button type="submit" class="btn btn-success">
+                                {{ 'COMPANY_PROFILE.update_button' | translate }}
+                            </button>
+
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

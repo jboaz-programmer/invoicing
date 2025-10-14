@@ -1,0 +1,205 @@
+<section class="section">
+  <div class="section-body">
+
+    <!-- ACTION BUTTONS -->
+    <div class="invoice-actions no-print">
+      <button class="btn btn-primary btn-icon icon-left" data-toggle="modal" data-target="#exampleModal1">
+        <i class="fas fa-credit-card"></i> {{ 'invoice_page.process_payment' | translate }}
+      </button>
+      <button class="btn btn-danger btn-icon icon-left">
+        <i class="fas fa-times"></i> {{ 'invoice_page.cancel' | translate }}
+      </button>
+      <button class="btn btn-warning btn-icon icon-left" (click)="exportPDF()">
+        <i class="fas fa-print"></i> {{ 'invoice_page.print' | translate }}
+      </button>
+    </div>
+
+    <!-- INVOICE CONTAINER -->
+    <div #invoice class="invoice shadow rounded invoice-container">
+
+      <!-- HEADER (Logo only) -->
+      <div class="header-box d-flex justify-content-end align-items-center">
+        <div class="company-logo">
+          <ng-container *ngIf="companyDetails?.logo_url; else initials">
+            <img [src]="companyDetails.logo_url" alt="Logo">
+          </ng-container>
+          <ng-template #initials>
+            <div class="logo-initials">{{ getInitials(companyDetails?.company) }}</div>
+          </ng-template>
+        </div>
+      </div>
+      <!-- BILL TO / SHIP TO -->
+      <div class="row p-4">
+        <div class="col-md-6">
+          <address>
+            <strong>{{ 'invoice_page.invoice_from' | translate }}</strong><br>
+            {{companyDetails?.company}}<br>
+            {{companyDetails?.adress}}<br>
+            {{companyDetails?.tin}}<br>
+            {{companyDetails?.vat}}<br>
+          </address>
+        </div>
+        <div class="col-md-6 text-md-right">
+          <address>
+            <strong>{{ 'invoice_page.billed_to' | translate }}</strong><br>
+            {{invoices?.payee}}<br>
+            <strong>{{ 'invoice_page.invoice_date' | translate }}</strong><br>
+            {{ invoices?.created_at | date:'dd/MM/yyyy' }}
+          </address>
+        </div>
+      </div>
+
+      <!-- ORDER SUMMARY -->
+      <div class="row mt-4 px-4">
+        <div class="col-md-12">
+          <h5 class="mb-2">{{ 'invoice_page.invoice_summary' | translate }}</h5>
+          <div class="table-responsive">
+            <table class="table table-bordered table-striped">
+              <thead class="thead-light">
+                <tr>
+                  <th>#</th>
+                  <th>{{ 'invoice_page.item' | translate }}</th>
+                  <th class="text-center">{{ 'invoice_page.unit_price_usd' | translate }}</th>
+                  <th class="text-center">{{ 'invoice_page.unit_price_tzs' | translate }}</th>
+                  <th class="text-center">{{ 'invoice_page.vat' | translate }}</th>
+                  <th class="text-center">{{ 'invoice_page.qty' | translate }}</th>
+                  <th class="text-right">{{ 'invoice_page.totals' | translate }}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let inv of invoicesDetails; let i = index">
+                  <td>{{i + 1}}</td>
+                  <td>{{inv?.item}}</td>
+                  <td class="text-center">{{ (inv?.unit_amount / invoices?.exch_rate) | number:'1.2-2' }}</td>
+                  <td class="text-center">{{inv?.unit_amount |number:'1.2-2'}}</td>
+                  <td class="text-center">{{inv?.vatamount |number:'1.2-2'}}</td>
+                  <td class="text-center">{{inv?.Qty |number}}</td>
+                  <td class="text-right">{{inv?.total_amount |number:'1.2-2'}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- PAYMENT METHODS & TOTALS -->
+          <div class="row mt-4">
+            <div class="col-lg-8">
+              <h6>{{ 'invoice_page.payment_methods' | translate }}</h6>
+              <p class="text-muted">{{ 'invoice_page.payment_info' | translate }}</p>
+              <div class="images d-flex">
+                <address>
+                  {{companyDetails?.bank_one}}<br>
+                  {{companyDetails?.bank_two}}<br>
+                  {{companyDetails?.mobile_one}}<br>
+                  {{companyDetails?.mobile_two}}
+                </address>
+              </div>
+            </div>
+            <!-- Totals -->
+            <div class="col-lg-4 text-right">
+              <div class="invoice-detail-item">
+                <div class="invoice-detail-name">{{ 'invoice_page.subtotal' | translate }}</div>
+                <div class="invoice-detail-value">{{ subtotal | number:'1.2-2' }}</div>
+              </div>
+              <div class="invoice-detail-item">
+                <div class="invoice-detail-name">{{ 'invoice_page.vat' | translate }}</div>
+                <div class="invoice-detail-value">{{ vat | number:'1.2-2' }}</div>
+              </div>
+              <hr>
+              <div class="invoice-detail-item">
+                <div class="invoice-detail-name font-weight-bold">{{ 'invoice_page.total_amount' | translate }}</div>
+                <div class="invoice-detail-value-lg">{{ total | number:'1.2-2' }}</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- FOOTER  -->
+      <div class="invoice-footer">
+        {{ 'invoice_page.thank_you' | translate }}
+      </div>
+
+    </div>
+  </div>
+</section>
+<div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="formModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="formModal">Receive Amount From Client</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     <div class="modal-body">
+  <input type="hidden" class="form-control" name="transaction_id">
+
+  <!-- 💬 Mockup invoice summary -->
+  <div class="card p-3 mb-3 bg-light">
+    <h6 class="mb-2">Invoice Summary</h6>
+    <div class="d-flex justify-content-between">
+      <span><strong>Invoice No:</strong></span>
+      <span>{{transID?.receipt_no }}</span>
+    </div>
+    <div class="d-flex justify-content-between">
+      <span><strong>Customer:</strong></span>
+      <span>{{ transID?.payee || 'John Doe Ltd' }}</span>
+    </div>
+    <div class="d-flex justify-content-between">
+      <span><strong>Total Amount:</strong></span>
+      <span>{{ transID?.total_amount_sum || 150000 | number:'1.0-0' }} TZS</span>
+    </div>
+    <div class="d-flex justify-content-between text-success">
+      <span><strong>Paid Amount:</strong></span>
+      <span>{{ transID?.paid_sum | number:'1.0-0' }} TZS</span>
+    </div>
+    <div class="d-flex justify-content-between text-danger">
+      <span><strong>Balance:</strong></span>
+      <span>{{ transID?.balance_sum | number:'1.0-0' }} TZS</span>
+    </div>
+  </div>
+
+  <!-- 🧾 Payment form -->
+  <form *ngIf="transID?.balance_sum > 0">
+    <div class="form-group">
+      <label>Paid From</label>
+      <div class="input-group">
+        <select class="form-control" name="paidfrom" [(ngModel)]="postData.paidfrom" *ngIf="accounts$ | async as data">
+          <option *ngFor="let acc of data; let i = index" [value]="acc.name">{{ acc.name }}</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="input-group mb-3">
+      <textarea rows="5" class="form-control" placeholder="Description" [(ngModel)]="postData.description" name="description"></textarea>
+    </div>
+
+<div class="form-group" >
+  <label>Received Amount</label>
+  <div class="input-group">
+    <input
+      type="number"
+      class="form-control"
+      placeholder="Enter amount"
+      [(ngModel)]="postData.amount"
+      name="amount"
+      [max]="transID?.balance_sum"
+    >
+  </div>
+</div>
+
+    <button
+      type="button"
+      class="btn btn-primary m-t-15 waves-effect"
+      (click)="RecordPayment(invoicesDetails[0].transaction_id)"
+      data-dismiss="modal"
+    >
+      Save
+    </button>
+  </form>
+</div>
+
+    </div>
+  </div>
+</div>
